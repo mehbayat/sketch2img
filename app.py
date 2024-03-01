@@ -6,6 +6,7 @@ from pathlib import Path
 import gradio as gr
 from PIL import Image
 import requests
+import numpy as np
 import settings
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
@@ -24,9 +25,11 @@ def get_latest_image(folder):
     return latest_image
 
 
-def fn(sketch_image, seed_number, positive_prompt):
-
-    composite = sketch_image["composite"]
+def save_sketch_image(img):
+    composite = img["composite"]
+    if np.sum(composite) == 0:
+        raise Exception
+    
     pillow_image = Image.fromarray(composite)
     if pillow_image.mode == 'RGBA':
         background = Image.new('RGB', pillow_image.size, (255, 255, 255))
@@ -37,6 +40,11 @@ def fn(sketch_image, seed_number, positive_prompt):
     pillow_image.save(str(sketch_input))
 
     with (open('sketch2image_api.json', 'r', encoding='utf-8') as file_handle):
+def fn(sketch_image, seed_number, positive_prompt):
+    try:
+        save_sketch_image(sketch_image)
+    except Exception:
+        return str(Path(settings.MISSING_SKETCH))
         data = json.load(file_handle)
         data["3"]["inputs"]["seed"] = seed_number
         logging.info(f"Received seed_number: {seed_number}")
