@@ -303,7 +303,7 @@
   },
   "54": {
     "inputs": {
-      "image": "house_color.png",
+      "image": "color.png",
       "upload": "image"
     },
     "class_type": "LoadImage",
