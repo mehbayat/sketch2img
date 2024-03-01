@@ -13,12 +13,27 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s - %(message)s")
 
 
 def send_image(workflow):
+    """
+    Send image to the specified workflow.
+
+    Parameters:
+        workflow (str): The workflow to which the image is sent.
+    """
     p = {"prompt": workflow}
     data = json.dumps(p).encode("utf-8")
     r = requests.post(settings.URL, data=data)
 
 
 def get_latest_image(folder):
+    """
+    Get the path of the latest image in the specified folder.
+
+    Parameters:
+        folder (str): The output folder containing images.
+
+    Returns:
+        str: The path of the latest image.
+    """
     folder_path = Path(folder)
     images = [f for f in folder_path.glob("*.png")]
     latest_image = str(max(images, key=lambda x: x.stat().st_ctime))
@@ -26,6 +41,15 @@ def get_latest_image(folder):
 
 
 def save_sketch_image(img):
+    """
+    Save the sketch image to the specified path.
+
+    Parameters:
+        img (dict): Dictionary containing the composite image.
+
+    Raises:
+        Exception: If the sum of the composite image is zero.
+    """
     composite = img["composite"]
     if np.sum(composite) == 0:
         raise Exception
@@ -43,6 +67,18 @@ def save_sketch_image(img):
 
 
 def fn(sketch_image, positive_prompt, color_blend):
+    """
+    Process the sketch image and generate a new image.
+
+    Parameters:
+        sketch_image (dict): Dictionary containing the sketch image.
+        positive_prompt (str): Positive prompt for the image generation.
+        color_blend (float): Blend factor for color.
+
+    Returns:
+        str: The path of the generated image.
+    """
+
     try:
         save_sketch_image(sketch_image)
     except Exception:
