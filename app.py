@@ -44,6 +44,7 @@ def fn(sketch_image, seed_number, positive_prompt):
     try:
         save_sketch_image(sketch_image)
     except Exception:
+        gr.Warning("Sketch is empty")
         return str(Path(settings.MISSING_SKETCH))
 
     with open(settings.WORKFLOW_FILE, 'r', encoding='utf-8') as file_handle:
