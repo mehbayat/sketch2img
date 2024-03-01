@@ -49,7 +49,8 @@ def fn(sketch_image, seed_number, positive_prompt):
 
     with open(settings.WORKFLOW_FILE, 'r', encoding='utf-8') as file_handle:
         data = json.load(file_handle)
-        data["3"]["inputs"]["seed"] = seed_number
+        data["3"]["inputs"]["seed"] = random.randint(1,999999999)
+        data["51"]["inputs"]["seed"] = random.randint(1,999999999)
         logging.info(f"Received seed_number: {seed_number}")
         
         data["6"]["inputs"]["text"] = f"{positive_prompt}" + ", high quality, masterpiece, detailed"
@@ -70,7 +71,6 @@ def fn(sketch_image, seed_number, positive_prompt):
 
 demo = gr.Interface(fn=fn, inputs=[
     gr.Paint(),
-    gr.Number(value=1, label='Seed Number'),
     gr.Textbox(value='Enter a prompt', label='Prompt'),
     ],
     outputs=["image"]
