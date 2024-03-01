@@ -40,7 +40,7 @@ def save_sketch_image(img):
     pillow_image.save(str(sketch_input))
 
 
-def fn(sketch_image, seed_number, positive_prompt):
+def fn(sketch_image, positive_prompt, color_blend):
     try:
         save_sketch_image(sketch_image)
     except Exception:
@@ -57,6 +57,7 @@ def fn(sketch_image, seed_number, positive_prompt):
         logging.info(f'Received positive_prompt input: {data["6"]["inputs"]["text"]}')
 
         data["28"]["inputs"]["image"] = 'sketch_input.png'
+        data["56"]["inputs"]["blend_factor"] = color_blend
 
     previous_image = get_latest_image(settings.OUTPUT_PATH)
 
@@ -72,6 +73,7 @@ def fn(sketch_image, seed_number, positive_prompt):
 demo = gr.Interface(fn=fn, inputs=[
     gr.Paint(),
     gr.Textbox(value='Enter a prompt', label='Prompt'),
+    gr.Slider(minimum=0.0, maximum=1.0, value=0.25, step=0.05, label="Color Blend")
     ],
     outputs=["image"]
 ).queue()
