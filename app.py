@@ -9,10 +9,6 @@ import requests
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
 
-OUTPUT_PATH = r"C:\Users\Mehrad Bayat\Desktop\ComfyUI_windows_portable\ComfyUI\output"
-INPUT_PATH = r"C:\Users\Mehrad Bayat\Desktop\ComfyUI_windows_portable\ComfyUI\input"
-URL = "http://127.0.0.1:8188/prompt"
-
 
 def send_image(workflow):
     p = {'prompt': workflow}
