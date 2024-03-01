@@ -51,10 +51,7 @@ def fn(sketch_image, seed_number, positive_prompt):
         data["6"]["inputs"]["text"] = f"{positive_prompt}" + ", high quality, masterpiece, detailed"
         logging.info(f'Received positive_prompt input: {data["6"]["inputs"]["text"]}')
 
-        try:
-            data["28"]["inputs"]["image"] = 'sketch_input.png'
-        except ValueError as e:
-            print(e)
+        data["28"]["inputs"]["image"] = 'sketch_input.png'
 
     previous_image = get_latest_image(settings.OUTPUT_PATH)
 
