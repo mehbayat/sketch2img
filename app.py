@@ -39,15 +39,18 @@ def save_sketch_image(img):
     sketch_input = Path(settings.INPUT_PATH) / 'sketch_input.png'
     pillow_image.save(str(sketch_input))
 
-    with (open('sketch2image_api.json', 'r', encoding='utf-8') as file_handle):
+
 def fn(sketch_image, seed_number, positive_prompt):
     try:
         save_sketch_image(sketch_image)
     except Exception:
         return str(Path(settings.MISSING_SKETCH))
+
+    with open(settings.WORKFLOW_FILE, 'r', encoding='utf-8') as file_handle:
         data = json.load(file_handle)
         data["3"]["inputs"]["seed"] = seed_number
         logging.info(f"Received seed_number: {seed_number}")
+        
         data["6"]["inputs"]["text"] = f"{positive_prompt}" + ", high quality, masterpiece, detailed"
         logging.info(f'Received positive_prompt input: {data["6"]["inputs"]["text"]}')
 
