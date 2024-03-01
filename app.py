@@ -73,8 +73,7 @@ demo = gr.Interface(fn=fn, inputs=[
     gr.Textbox(value='Enter a prompt', label='Prompt'),
     ],
     outputs=["image"]
-)
-
+).queue()
 
 demo.launch()
 
