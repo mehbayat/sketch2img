@@ -6,6 +6,7 @@ from pathlib import Path
 import gradio as gr
 from PIL import Image
 import requests
+import settings
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
 
@@ -13,7 +14,7 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
 def send_image(workflow):
     p = {'prompt': workflow}
     data = json.dumps(p).encode('utf-8')
-    r = requests.post(URL, data=data)
+    r = requests.post(settings.URL, data=data)
 
 
 def get_latest_image(folder):
@@ -32,7 +33,7 @@ def fn(sketch_image, seed_number, positive_prompt):
         background.paste(pillow_image, mask=pillow_image.split()[3])
         pillow_image = background
 
-    sketch_input = Path(INPUT_PATH) / 'sketch_input.png'
+    sketch_input = Path(settings.INPUT_PATH) / 'sketch_input.png'
     pillow_image.save(str(sketch_input))
 
     with (open('sketch2image_api.json', 'r', encoding='utf-8') as file_handle):
@@ -47,12 +48,12 @@ def fn(sketch_image, seed_number, positive_prompt):
         except ValueError as e:
             print(e)
 
-    previous_image = get_latest_image(OUTPUT_PATH)
+    previous_image = get_latest_image(settings.OUTPUT_PATH)
 
     send_image(data)
 
     while True:
-        new_image = get_latest_image(OUTPUT_PATH)
+        new_image = get_latest_image(settings.OUTPUT_PATH)
         if previous_image != new_image:
             return new_image
         time.sleep(1)
