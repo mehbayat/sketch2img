@@ -93,7 +93,7 @@
   },
   "10": {
     "inputs": {
-      "lora_name": "latent-consistency_lcm-lora-sdv1-5.safetensors",
+      "lora_name": "LCM_LoRA_SDv15.safetensors",
       "strength_model": 1,
       "strength_clip": 1,
       "model": [
@@ -147,7 +147,7 @@
   },
   "14": {
     "inputs": {
-      "control_net_name": "control_v11p_sd15_scribble_fp16.safetensors"
+      "control_net_name": "sd-controlnet-scribble.safetensors"
     },
     "class_type": "ControlNetLoader",
     "_meta": {

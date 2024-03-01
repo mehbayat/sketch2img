@@ -2,6 +2,7 @@ import json
 import time
 import logging
 from pathlib import Path
+import random
 
 import gradio as gr
 from PIL import Image
@@ -87,9 +88,9 @@ def fn(sketch_image, positive_prompt, color_blend):
 
     with open(settings.WORKFLOW_FILE, "r", encoding="utf-8") as file_handle:
         data = json.load(file_handle)
-        data["3"]["inputs"]["seed"] = random.randint(1, 999999999)
-        data["51"]["inputs"]["seed"] = random.randint(1, 999999999)
-        logging.info(f"Received seed_number: {seed_number}")
+        data["3"]["inputs"]["seed"] = 962597416886331
+        data["51"]["inputs"]["seed"] = 615610538561029
+        #logging.info(f"Received seed_number: {seed_number}")
 
         data["6"]["inputs"]["text"] = (
             f"{positive_prompt}" + ", high quality, masterpiece, detailed"
