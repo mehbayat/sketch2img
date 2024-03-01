@@ -31,6 +31,8 @@ def save_sketch_image(img):
         raise Exception
     
     pillow_image = Image.fromarray(composite)
+    pillow_image.save(Path(settings.INPUT_PATH) / 'color.png')
+
     if pillow_image.mode == 'RGBA':
         background = Image.new('RGB', pillow_image.size, (255, 255, 255))
         background.paste(pillow_image, mask=pillow_image.split()[3])
@@ -79,5 +81,3 @@ demo = gr.Interface(fn=fn, inputs=[
 ).queue()
 
 demo.launch()
-
-
