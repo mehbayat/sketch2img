@@ -2,10 +2,11 @@
 
 This app is a Python application that uses Gradio to create a simple user interface for generating images based on sketches using ComfyUI as the backend. 
 
-## Screenshots
-![ComfyUI Logo](images/comfyui_logo.png)
+## Examples
 
-<img src="images/comfyui_logo.png" alt="ComfyUI Logo">
+<img src="media/Screenshot (117) (1).png" alt="Example1">
+
+<img src="media/Screenshot (118).png" alt="Example2">
 
 
 ## Prerequisites
@@ -55,7 +56,7 @@ This project is licensed under the MIT License.
 
 ## Acknowledgments
 
-- ComfyUI - link
-- Gradio - link
+- [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
+- [Gradio](https://github.com/gradio-app/gradio)
 
 Feel free to contribute to the project or report issues. Happy coding!
