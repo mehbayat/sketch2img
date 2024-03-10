@@ -1,6 +1,6 @@
 # Sketch2Img
 
-This app is a Python application that uses Gradio to create a simple user interface for generating images based on sketches using ComfyUI as the backend. 
+This app is a Python application that uses Stable Diffusion to create a simple user interface (Gradio) for generating images based on sketches using ComfyUI as the backend. 
 
 ## Examples
 
